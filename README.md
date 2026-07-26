@@ -19,7 +19,7 @@
 | :---: | :---: |
 | ![3D Watch Viewer](docs/screenshots/watch-3d-viewer.png) | ![Admin Dashboard](docs/screenshots/admin-dashboard.png) |
 
-* **Live Demo:** [https://horologue-demo.example.com](https://horologue-demo.example.com) *(Demo Link Placeholder)*
+* **Live Application:** [https://horologue-store.vercel.app](https://horologue-store.vercel.app)
 
 ---
 
