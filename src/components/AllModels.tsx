@@ -63,8 +63,8 @@ const AllModels: React.FC<AllModelsProps> = ({ onReturn, onSelectProduct }) => {
   }, []);
 
   return (
-    <div style={{ background: 'var(--color-obsidian)', minHeight: '100vh', paddingBottom: '6rem' }}>
-      <nav style={{ padding: '2rem 4rem', display: 'flex', alignItems: 'center', borderBottom: '1px solid rgba(229, 228, 226, 0.1)' }}>
+    <div className="min-full-dvh" style={{ background: 'var(--color-obsidian)', paddingBottom: '6rem' }}>
+      <nav style={{ padding: '1.25rem clamp(1rem, 4vw, 4rem)', display: 'flex', alignItems: 'center', borderBottom: '1px solid rgba(229, 228, 226, 0.1)' }}>
         <button 
           onClick={onReturn}
           style={{
@@ -78,21 +78,22 @@ const AllModels: React.FC<AllModelsProps> = ({ onReturn, onSelectProduct }) => {
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
-            gap: '0.5rem'
+            gap: '0.5rem',
+            minHeight: '44px'
           }}
         >
           ← Return to Home
         </button>
       </nav>
 
-      <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '4rem' }}>
-        <div style={{ marginBottom: '4rem', textAlign: 'center' }}>
+      <div style={{ maxWidth: '1440px', margin: '0 auto', padding: 'clamp(2rem, 5vw, 4rem) clamp(1rem, 4vw, 4rem)' }}>
+        <div style={{ marginBottom: '3rem', textAlign: 'center' }}>
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             style={{ 
               fontFamily: 'var(--font-display)', 
-              fontSize: '3.5rem', 
+              fontSize: 'clamp(2rem, 5vw, 3.5rem)', 
               color: 'var(--color-white)',
               marginBottom: '1rem',
               letterSpacing: '-0.02em'
@@ -116,7 +117,7 @@ const AllModels: React.FC<AllModelsProps> = ({ onReturn, onSelectProduct }) => {
           </motion.p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '2rem' }}>
           {enrichedWatches.map((watch, i) => (
             <motion.div 
               key={i}

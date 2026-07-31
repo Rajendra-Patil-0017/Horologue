@@ -668,16 +668,24 @@ export const Checkout: React.FC<CheckoutProps> = ({ items, onReturn, onOrderSucc
       </header>
 
       {/* Main Container */}
-      <main style={{ paddingTop: '8rem', paddingBottom: '8rem', paddingLeft: '4rem', paddingRight: '4rem', width: '100%', maxWidth: '1440px', margin: '0 auto', boxSizing: 'border-box' }}>
+      <main style={{ paddingTop: '6rem', paddingBottom: '6rem', paddingLeft: 'clamp(1rem, 4vw, 4rem)', paddingRight: 'clamp(1rem, 4vw, 4rem)', width: '100%', maxWidth: '1440px', margin: '0 auto', boxSizing: 'border-box' }}>
         <style dangerouslySetInnerHTML={{ __html: `
           .checkout-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 4rem;
+            gap: 3rem;
           }
           @media (min-width: 992px) {
             .checkout-grid {
               grid-template-columns: 1.2fr 1fr;
+            }
+          }
+          @media (max-width: 767px) {
+            .checkout-form-2col {
+              grid-template-columns: 1fr !important;
+            }
+            .payment-selectors-grid {
+              grid-template-columns: 1fr !important;
             }
           }
           .checkout-input {
@@ -685,7 +693,7 @@ export const Checkout: React.FC<CheckoutProps> = ({ items, onReturn, onOrderSucc
             background: rgba(26, 26, 26, 0.6);
             border: 1px solid var(--color-border);
             color: var(--color-white);
-            padding: 1rem;
+            padding: 0.875rem 1rem;
             font-family: var(--font-body);
             font-size: 0.95rem;
             outline: none;
@@ -789,12 +797,13 @@ export const Checkout: React.FC<CheckoutProps> = ({ items, onReturn, onOrderSucc
                       {errors.name && <span className="error-text">{errors.name}</span>}
                     </div>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+                    <div className="checkout-form-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
                       <div>
                         <label htmlFor="shipping-email" className="checkout-label">Email Address</label>
                         <input
                           id="shipping-email"
                           type="email"
+                          inputMode="email"
                           className="checkout-input"
                           placeholder="john@example.com"
                           value={shipping.email}
@@ -837,6 +846,7 @@ export const Checkout: React.FC<CheckoutProps> = ({ items, onReturn, onOrderSucc
                           <input
                             id="shipping-phone"
                             type="tel"
+                            inputMode="tel"
                             className="checkout-input"
                             placeholder="(555) 000-0000"
                             value={shipping.phone}
@@ -863,7 +873,7 @@ export const Checkout: React.FC<CheckoutProps> = ({ items, onReturn, onOrderSucc
                       {errors.streetAddress && <span className="error-text">{errors.streetAddress}</span>}
                     </div>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+                    <div className="checkout-form-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
                       <div>
                         <label htmlFor="shipping-city" className="checkout-label">City</label>
                         <input
@@ -892,12 +902,13 @@ export const Checkout: React.FC<CheckoutProps> = ({ items, onReturn, onOrderSucc
                       </div>
                     </div>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+                    <div className="checkout-form-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
                       <div>
                         <label htmlFor="shipping-zip" className="checkout-label">ZIP / Postal Code</label>
                         <input
                           id="shipping-zip"
                           type="text"
+                          inputMode="numeric"
                           className="checkout-input"
                           placeholder="10001"
                           value={shipping.zipCode}
@@ -943,7 +954,7 @@ export const Checkout: React.FC<CheckoutProps> = ({ items, onReturn, onOrderSucc
                   </h2>
 
                   {/* Selector Cards */}
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem', marginBottom: '2rem' }}>
+                  <div className="payment-selectors-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem', marginBottom: '2rem' }}>
                     
                     {/* Cash on Delivery */}
                     <div

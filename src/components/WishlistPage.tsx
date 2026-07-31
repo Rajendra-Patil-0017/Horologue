@@ -53,33 +53,32 @@ export const WishlistPage: React.FC<WishlistPageProps> = ({
   };
 
   return (
-    <div style={{ background: 'var(--color-obsidian)', minHeight: '100vh', color: 'var(--color-white)', fontFamily: 'var(--font-body)', overflowY: 'auto' }}>
+    <div className="min-full-dvh" style={{ background: 'var(--color-obsidian)', color: 'var(--color-white)', fontFamily: 'var(--font-body)', overflowY: 'auto' }}>
       {/* CSS Injections for responsiveness and hover transitions */}
       <style dangerouslySetInnerHTML={{ __html: `
         .wishlist-container {
           max-width: 1200px;
           margin: 0 auto;
-          padding: 8rem 2rem 8rem;
+          padding: clamp(5rem, 8vw, 8rem) clamp(1rem, 4vw, 4rem);
         }
         .wishlist-grid {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
           gap: 2.5rem;
           margin-top: 3.5rem;
         }
-        @media (max-width: 960px) {
-          .wishlist-grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-          }
-        }
-        @media (max-width: 640px) {
+        @media (max-width: 767px) {
           .wishlist-grid {
             grid-template-columns: 1fr;
             gap: 2rem;
           }
           .wishlist-btn-group {
             flex-direction: column;
+            width: 100%;
+          }
+          .wishlist-btn-group button {
+            width: 100%;
+            min-height: 44px;
           }
         }
         .wishlist-card {
@@ -114,7 +113,9 @@ export const WishlistPage: React.FC<WishlistPageProps> = ({
           color: var(--color-gold);
           display: flex;
           align-items: center;
-          justifyContent: center;
+          justify-content: center;
+          min-width: 44px;
+          min-height: 44px;
           transition: transform 0.2s ease, background 0.3s ease;
         }
         .wishlist-heart-badge:hover {
@@ -124,10 +125,10 @@ export const WishlistPage: React.FC<WishlistPageProps> = ({
       `}} />
 
       {/* Header Navigation */}
-      <header style={{ borderBottom: '1px solid rgba(229, 228, 226, 0.1)', padding: '1.5rem 4rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'fixed', top: 0, width: '100%', background: 'rgba(10, 10, 10, 0.8)', backdropFilter: 'blur(10px)', zIndex: 100 }}>
+      <header style={{ borderBottom: '1px solid rgba(229, 228, 226, 0.1)', padding: '1.25rem clamp(1rem, 4vw, 4rem)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'fixed', top: 0, width: '100%', background: 'rgba(10, 10, 10, 0.8)', backdropFilter: 'blur(10px)', zIndex: 100 }}>
         <div 
           onClick={onNavigateHome}
-          style={{ fontFamily: 'var(--font-display)', fontSize: '1.5rem', fontWeight: 700, letterSpacing: '0.1em', cursor: 'pointer' }}
+          style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.2rem, 2vw + 0.8rem, 1.5rem)', fontWeight: 700, letterSpacing: '0.1em', cursor: 'pointer' }}
         >
           HOROLOGUE
         </div>
@@ -142,6 +143,7 @@ export const WishlistPage: React.FC<WishlistPageProps> = ({
             letterSpacing: '0.1em',
             textTransform: 'uppercase',
             cursor: 'pointer',
+            minHeight: '44px'
           }}
         >
           Return to Catalogue

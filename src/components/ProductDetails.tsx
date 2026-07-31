@@ -53,8 +53,8 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ watch, onReturn, onAddT
   const isOutOfStock = watch.stock !== undefined && watch.stock <= 0;
 
   return (
-    <div style={{ background: 'var(--color-obsidian)', minHeight: '100vh', paddingBottom: '6rem' }}>
-      <nav style={{ padding: '2rem 4rem', display: 'flex', alignItems: 'center', borderBottom: '1px solid rgba(229, 228, 226, 0.1)' }}>
+    <div className="min-full-dvh" style={{ background: 'var(--color-obsidian)', paddingBottom: '6rem' }}>
+      <nav style={{ padding: '1.25rem clamp(1rem, 4vw, 4rem)', display: 'flex', alignItems: 'center', borderBottom: '1px solid rgba(229, 228, 226, 0.1)' }}>
         <button 
           onClick={onReturn}
           style={{
@@ -68,17 +68,18 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ watch, onReturn, onAddT
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
-            gap: '0.5rem'
+            gap: '0.5rem',
+            minHeight: '44px'
           }}
         >
           ← Back to Catalogue
         </button>
       </nav>
 
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '4rem 4rem 0 4rem', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6rem' }}>
+      <div className="product-details-grid" style={{ maxWidth: '1200px', margin: '0 auto', padding: 'clamp(2rem, 5vw, 4rem) clamp(1rem, 4vw, 4rem)', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 340px), 1fr))', gap: 'clamp(2rem, 5vw, 6rem)' }}>
         
         {/* Images Section */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -120,7 +121,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ watch, onReturn, onAddT
             />
           </motion.div>
           
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.75rem' }}>
             {gallery.map((img, idx) => (
               <div 
                 key={idx}
@@ -151,13 +152,13 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ watch, onReturn, onAddT
               {watch.ref}
             </span>
             
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '2rem', margin: '0.5rem 0 1rem 0' }}>
-              <h1 style={{ fontFamily: 'var(--font-display)', fontSize: '3.5rem', color: 'var(--color-white)', margin: 0, lineHeight: 1.1 }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', margin: '0.5rem 0 1rem 0' }}>
+              <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2rem, 4vw, 3.5rem)', color: 'var(--color-white)', margin: 0, lineHeight: 1.1 }}>
                 {watch.name}
               </h1>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2.5rem' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
               <p style={{ fontFamily: 'var(--font-technical)', color: 'var(--color-silver)', fontSize: '1.5rem', margin: 0 }}>
                 {watch.price}
               </p>
@@ -172,7 +173,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ watch, onReturn, onAddT
               )}
             </div>
 
-            <p style={{ fontFamily: 'var(--font-body)', color: 'var(--color-slate)', lineHeight: 1.8, marginBottom: '3rem' }}>
+            <p style={{ fontFamily: 'var(--font-body)', color: 'var(--color-slate)', lineHeight: 1.8, marginBottom: '2.5rem' }}>
               {watch.description || "A masterpiece of horological engineering. Hand-assembled by master watchmakers, this piece features a bespoke in-house movement, sapphire crystal back, and a meticulously finished dial. Designed for those who command time."}
             </p>
 
@@ -181,38 +182,24 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ watch, onReturn, onAddT
                 {watch.id && <NotifyMeForm productId={watch.id} />}
               </div>
             ) : (
-              <div style={{ display: 'flex', gap: '1rem' }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
                 <button 
                   onClick={() => onBuyNow && onBuyNow(watch)}
+                  className="ingot-btn"
                   style={{
-                    flex: 1,
-                    background: 'var(--color-gold)',
-                    color: 'var(--color-obsidian)',
-                    border: 'none',
-                    padding: '1.25rem',
-                    fontFamily: 'var(--font-technical)',
-                    fontSize: '0.875rem',
-                    letterSpacing: '0.1em',
-                    textTransform: 'uppercase',
-                    cursor: 'pointer',
-                    transition: 'all 0.3s ease'
+                    flex: '1 1 180px',
+                    width: '100%',
+                    minHeight: '48px'
                   }}>
                   Buy Now
                 </button>
                 <button 
                   onClick={() => onAddToCart && onAddToCart(watch)}
+                  className="ghost-btn"
                   style={{
-                    flex: 1,
-                    background: 'transparent',
-                    color: 'var(--color-white)',
-                    border: '1px solid var(--color-silver)',
-                    padding: '1.25rem',
-                    fontFamily: 'var(--font-technical)',
-                    fontSize: '0.875rem',
-                    letterSpacing: '0.1em',
-                    textTransform: 'uppercase',
-                    cursor: 'pointer',
-                    transition: 'all 0.3s ease'
+                    flex: '1 1 180px',
+                    width: '100%',
+                    minHeight: '48px'
                   }}>
                   Add to Cart
                 </button>
@@ -223,7 +210,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ watch, onReturn, onAddT
 
       </div>
 
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 4rem 4rem 4rem' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 clamp(1rem, 4vw, 4rem) 4rem clamp(1rem, 4vw, 4rem)' }}>
         {watch.id && <ReviewsSection productId={watch.id} />}
       </div>
     </div>

@@ -42,7 +42,7 @@ export const NotifyMeForm: React.FC<NotifyMeFormProps> = ({ productId, style = {
           {message}
         </div>
       ) : (
-        <form onSubmit={handleSubmit} style={{ display: 'flex', gap: '0.5rem', width: '100%' }}>
+        <form onSubmit={handleSubmit} style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', width: '100%' }}>
           <input
             type="email"
             value={email}
@@ -51,14 +51,16 @@ export const NotifyMeForm: React.FC<NotifyMeFormProps> = ({ productId, style = {
             required
             disabled={loading}
             style={{
-              flex: 1,
+              flex: '1 1 200px',
+              width: '100%',
               background: 'rgba(255, 255, 255, 0.03)',
               border: '1px solid var(--color-border)',
-              padding: '1rem',
+              padding: '0.875rem 1rem',
               color: 'var(--color-white)',
               fontFamily: 'var(--font-body)',
               fontSize: '0.875rem',
               outline: 'none',
+              minHeight: '44px',
               transition: 'border-color 0.3s ease'
             }}
             onFocus={(e) => (e.target.style.borderColor = 'var(--color-gold)')}
@@ -67,18 +69,11 @@ export const NotifyMeForm: React.FC<NotifyMeFormProps> = ({ productId, style = {
           <button
             type="submit"
             disabled={loading}
+            className="ingot-btn"
             style={{
-              background: 'var(--color-gold)',
-              color: 'var(--color-obsidian)',
-              border: 'none',
-              padding: '0 1.5rem',
-              fontFamily: 'var(--font-technical)',
-              fontSize: '0.75rem',
-              letterSpacing: '0.1em',
-              textTransform: 'uppercase',
-              cursor: 'pointer',
-              opacity: loading ? 0.7 : 1,
-              transition: 'opacity 0.3s ease'
+              flex: '1 1 auto',
+              minHeight: '44px',
+              padding: '0 1.5rem'
             }}
           >
             {loading ? 'Submitting...' : 'Notify'}

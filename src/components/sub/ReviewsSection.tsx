@@ -62,7 +62,7 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({ productId }) => 
 
   return (
     <div style={{ marginTop: '5rem', borderTop: '1px solid rgba(229, 228, 226, 0.1)', paddingTop: '4rem', width: '100%' }}>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', gap: '4rem' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: 'clamp(2rem, 5vw, 4rem)' }}>
         
         {/* Left column: Summary and Review Form */}
         <div>

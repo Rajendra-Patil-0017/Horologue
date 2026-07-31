@@ -499,13 +499,22 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout, onNavi
           flex-direction: column;
           gap: 0.5rem;
         }
+        .admin-table-container {
+          width: 100%;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+        }
+        .chart-bar {
+          width: clamp(14px, 3vw, 30px) !important;
+        }
         @media (max-width: 960px) {
           .admin-sidebar {
             flex-direction: row;
             border-right: none;
             border-bottom: 1px solid var(--color-border);
             overflow-x: auto;
-            padding: 1rem 1.5rem;
+            padding: 0.75rem 1rem;
+            -webkit-overflow-scrolling: touch;
           }
         }
         .sidebar-link {
@@ -513,7 +522,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout, onNavi
           font-size: 0.85rem;
           font-weight: 500;
           text-transform: uppercase;
-          letter-spacing: 0.22em;
+          letter-spacing: 0.18em;
           color: #7a756b;
           padding: 1.1rem 1.4rem;
           cursor: pointer;
@@ -526,6 +535,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout, onNavi
           display: flex;
           align-items: center;
           border-radius: 2px;
+          min-height: 44px;
         }
         .sidebar-link:hover {
           color: #d4af37;
@@ -550,12 +560,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout, onNavi
           }
         }
         .admin-content {
-          padding: 3rem;
-        }
-        @media (max-width: 768px) {
-          .admin-content {
-            padding: 1.5rem;
-          }
+          padding: clamp(1rem, 4vw, 3rem);
         }
         .stats-grid {
           display: grid;

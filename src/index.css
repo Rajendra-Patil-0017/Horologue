@@ -14,6 +14,11 @@
   --font-body: 'Hanken Grotesk', sans-serif;
   --font-technical: 'JetBrains Mono', monospace;
 
+  /* Breakpoints */
+  --bp-tablet: 768px;
+  --bp-laptop: 1024px;
+  --bp-desktop: 1440px;
+
   /* Z-indexes */
   --z-nav: 50;
   --z-overlay: 40;
@@ -34,6 +39,7 @@ html {
 
 body {
   min-height: 100vh;
+  min-height: 100dvh;
   overflow-x: hidden;
   background: radial-gradient(circle at 50% 0%, var(--color-background), var(--color-obsidian) 80%);
 }
@@ -44,12 +50,48 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.02em;
 }
 
+h1 {
+  font-size: clamp(2rem, 5vw + 1rem, 4.5rem);
+}
+
+h2 {
+  font-size: clamp(1.5rem, 3.5vw + 0.8rem, 3rem);
+}
+
+h3 {
+  font-size: clamp(1.25rem, 2.5vw + 0.6rem, 2.25rem);
+}
+
+h4 {
+  font-size: clamp(1.1rem, 1.8vw + 0.5rem, 1.75rem);
+}
+
+h5, h6 {
+  font-size: clamp(1rem, 1.2vw + 0.5rem, 1.25rem);
+}
+
 .technical-text {
   font-family: var(--font-technical);
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  font-size: 0.75rem;
+  font-size: clamp(0.7rem, 0.5vw + 0.5rem, 0.85rem);
   color: var(--color-platinum);
+}
+
+.full-dvh {
+  height: 100vh;
+  height: 100dvh;
+}
+
+.min-full-dvh {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.table-scroll-container {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Custom Scrollbar */
@@ -77,6 +119,8 @@ button {
   cursor: pointer;
   font-family: inherit;
   color: inherit;
+  min-height: 44px;
+  touch-action: manipulation;
 }
 
 .ingot-btn {
@@ -85,10 +129,14 @@ button {
   font-family: var(--font-technical);
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  padding: 1rem 2rem;
+  padding: 0.875rem 1.75rem;
   font-weight: 600;
   transition: all 0.3s ease;
   border-radius: 0;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .ingot-btn:hover {
@@ -105,6 +153,10 @@ button {
   letter-spacing: 0.1em;
   padding: 0.75rem 1.5rem;
   transition: all 0.3s ease;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .ghost-btn:hover {
@@ -117,3 +169,14 @@ button {
   backdrop-filter: blur(20px);
   border: 1px solid var(--color-border);
 }
+
+/* Accessibility: Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+

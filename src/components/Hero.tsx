@@ -12,7 +12,18 @@ const Hero: React.FC = () => {
   const scaleBg = useTransform(scrollY, [0, 1000], [1, 1.2]);
 
   return (
-    <section ref={sectionRef} style={{ position: 'relative', height: '120vh', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <section 
+      ref={sectionRef} 
+      className="full-dvh"
+      style={{ 
+        position: 'relative', 
+        overflow: 'hidden', 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'center',
+        padding: '0 1rem'
+      }}
+    >
       {/* Abstract WebGL-like background */}
       <motion.div 
         style={{
@@ -34,7 +45,17 @@ const Hero: React.FC = () => {
       </motion.div>
 
       <motion.div 
-        style={{ y: yText, opacity: opacityText, textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2rem' }}
+        style={{ 
+          y: yText, 
+          opacity: opacityText, 
+          textAlign: 'center', 
+          display: 'flex', 
+          flexDirection: 'column', 
+          alignItems: 'center', 
+          gap: '1.5rem',
+          maxWidth: '900px',
+          width: '100%'
+        }}
       >
         <motion.p 
           initial={{ opacity: 0, y: 20 }}
@@ -49,7 +70,12 @@ const Hero: React.FC = () => {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.5, ease: "easeOut" }}
-          style={{ fontSize: '7vw', lineHeight: 1, color: 'var(--color-white)', whiteSpace: 'nowrap' }}
+          style={{ 
+            fontSize: 'clamp(2.5rem, 6vw + 1rem, 6rem)', 
+            lineHeight: 1.05, 
+            color: 'var(--color-white)',
+            wordBreak: 'break-word'
+          }}
         >
           TIME <span style={{ color: 'var(--color-gold)', fontStyle: 'italic' }}>REFINED.</span>
         </motion.h1>
@@ -58,7 +84,13 @@ const Hero: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.5 }}
-          style={{ fontSize: '1.25rem', color: 'var(--color-slate)', maxWidth: '500px', fontWeight: 300 }}
+          style={{ 
+            fontSize: 'clamp(1rem, 1.5vw + 0.5rem, 1.25rem)', 
+            color: 'var(--color-slate)', 
+            maxWidth: '500px', 
+            fontWeight: 300,
+            padding: '0 0.5rem' 
+          }}
         >
           A Legacy of Mechanical Perfection. Forged in obsidian, finished in brushed gold.
         </motion.p>
@@ -68,7 +100,7 @@ const Hero: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.8 }}
           className="ingot-btn"
-          style={{ marginTop: '2rem' }}
+          style={{ marginTop: '1rem' }}
           onClick={() => {
             const el = document.getElementById('collection');
             if (el) el.scrollIntoView({ behavior: 'smooth' });

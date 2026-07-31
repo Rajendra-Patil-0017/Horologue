@@ -1,4 +1,4 @@
-import React, { useRef, Suspense } from 'react';
+import React, { useRef, useEffect, Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Environment, Float, Sparkles, ContactShadows } from '@react-three/drei';
 import WatchModel from './WatchModel';
@@ -12,6 +12,18 @@ gsap.registerPlugin(ScrollTrigger);
 const WatchHero: React.FC = () => {
   const progressRef = useRef<HTMLDivElement>(null);
   const counterRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleResize = () => {
+      ScrollTrigger.refresh();
+    };
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('orientationchange', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('orientationchange', handleResize);
+    };
+  }, []);
 
   useGSAP(() => {
     // 1. Top Progress Bar Animation
@@ -68,7 +80,7 @@ const WatchHero: React.FC = () => {
     <section id="hero-scroll-container" style={{ position: 'relative', height: '1400vh', background: 'var(--color-obsidian)' }}>
       
       {/* Sticky container that holds the Canvas and DOM UI */}
-      <div style={{ position: 'sticky', top: 0, height: '100vh', width: '100%', overflow: 'hidden' }}>
+      <div className="full-dvh" style={{ position: 'sticky', top: 0, width: '100%', overflow: 'hidden' }}>
         
         {/* Progress Bar */}
         <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '4px', background: 'rgba(255,255,255,0.1)', zIndex: 20 }}>
@@ -76,26 +88,26 @@ const WatchHero: React.FC = () => {
         </div>
 
         {/* Step Counter */}
-        <div style={{ position: 'absolute', top: '2rem', right: '2rem', zIndex: 20, fontFamily: 'var(--font-technical)', color: 'var(--color-gold)', fontSize: '1rem', letterSpacing: '0.2em' }}>
+        <div style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', zIndex: 20, fontFamily: 'var(--font-technical)', color: 'var(--color-gold)', fontSize: '0.875rem', letterSpacing: '0.2em' }}>
            <span ref={counterRef}>01 / 13</span>
         </div>
 
         {/* Cinematic WebGL Background Elements */}
         <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at center, #1a1a1a 0%, #050505 100%)', zIndex: 0 }} />
 
-        {/* DOM UX Text Overlay - Left Aligned */}
-        <div style={{ position: 'absolute', top: '45%', left: '10%', transform: 'translateY(-50%)', zIndex: 10, pointerEvents: 'none' }}>
+        {/* DOM UX Text Overlay - Desktop & Mobile fluid placement */}
+        <div className="hero-text-overlay" style={{ zIndex: 10, pointerEvents: 'none' }}>
           {watchStages.map((stage, i) => (
-             <div key={`text-${stage.id}`} className={`stage-text-${i}`} style={{ position: 'absolute', top: 0, left: 0, opacity: 0, transform: 'translateY(20px)', width: '350px' }}>
-                <p style={{ fontFamily: 'var(--font-technical)', color: 'var(--color-gold)', fontSize: '0.875rem', letterSpacing: '0.2em', margin: '0 0 0.5rem 0' }}>
+             <div key={`text-${stage.id}`} className={`stage-text-${i} hero-stage-text`} style={{ opacity: 0, transform: 'translateY(20px)' }}>
+                <p style={{ fontFamily: 'var(--font-technical)', color: 'var(--color-gold)', fontSize: '0.8rem', letterSpacing: '0.15em', margin: '0 0 0.25rem 0' }}>
                   {stage.badge}
                 </p>
-                <h2 style={{ fontFamily: 'var(--font-display)', color: 'var(--color-white)', fontSize: '2.5rem', lineHeight: 1.1, margin: '0 0 1rem 0', textTransform: 'uppercase' }}>
+                <h2 style={{ fontFamily: 'var(--font-display)', color: 'var(--color-white)', fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', lineHeight: 1.1, margin: '0 0 0.75rem 0', textTransform: 'uppercase' }}>
                   {stage.title}
                 </h2>
                 
-                <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '1rem' }}>
-                  <p style={{ fontFamily: 'var(--font-technical)', color: 'var(--color-silver)', fontSize: '0.9rem', letterSpacing: '0.1em', margin: 0 }}>
+                <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '0.75rem' }}>
+                  <p style={{ fontFamily: 'var(--font-technical)', color: 'var(--color-slate)', fontSize: '0.85rem', letterSpacing: '0.05em', margin: 0 }}>
                     {stage.specs}
                   </p>
                 </div>
@@ -103,11 +115,11 @@ const WatchHero: React.FC = () => {
           ))}
         </div>
 
-        {/* DOM UX Image Overlay - Right Aligned */}
-        <div style={{ position: 'absolute', top: '45%', right: '10%', transform: 'translateY(-50%)', zIndex: 10, pointerEvents: 'none' }}>
+        {/* DOM UX Image Overlay - Desktop & Mobile fluid placement */}
+        <div className="hero-img-overlay" style={{ zIndex: 10, pointerEvents: 'none' }}>
           {watchStages.map((stage, i) => (
-             <div key={`img-${stage.id}`} className={`stage-img-${i}`} style={{ position: 'absolute', top: 0, right: 0, opacity: 0, transform: 'translateY(20px)', width: '350px' }}>
-                <div style={{ width: '100%', height: '250px', overflow: 'hidden', borderRadius: '8px', border: '1px solid rgba(212, 175, 55, 0.3)', boxShadow: '0 20px 40px rgba(0,0,0,0.5)' }}>
+             <div key={`img-${stage.id}`} className={`stage-img-${i} hero-stage-img`} style={{ opacity: 0, transform: 'translateY(20px)' }}>
+                <div style={{ width: '100%', height: '100%', overflow: 'hidden', borderRadius: '8px', border: '1px solid rgba(212, 175, 55, 0.3)', boxShadow: '0 20px 40px rgba(0,0,0,0.5)' }}>
                   <img src={stage.image} alt={stage.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 </div>
              </div>
@@ -132,6 +144,66 @@ const WatchHero: React.FC = () => {
           <Environment preset="studio" />
         </Canvas>
       </div>
+
+      <style>{`
+        .hero-text-overlay {
+          position: absolute;
+          top: 45%;
+          left: 8%;
+          transform: translateY(-50%);
+        }
+        .hero-stage-text {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: min(350px, 80vw);
+        }
+        .hero-img-overlay {
+          position: absolute;
+          top: 45%;
+          right: 8%;
+          transform: translateY(-50%);
+        }
+        .hero-stage-img {
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: min(320px, 75vw);
+          height: 220px;
+        }
+
+        @media (max-width: 767px) {
+          .hero-text-overlay {
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90vw;
+            display: flex;
+            justify-content: center;
+          }
+          .hero-stage-text {
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90vw;
+            text-align: center;
+          }
+          .hero-img-overlay {
+            top: auto;
+            bottom: 6%;
+            right: auto;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 85vw;
+          }
+          .hero-stage-img {
+            right: auto;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 85vw;
+            height: 160px;
+          }
+        }
+      `}</style>
     </section>
   );
 };

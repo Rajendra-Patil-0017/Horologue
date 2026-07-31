@@ -129,16 +129,16 @@ const Collection: React.FC<CollectionProps> = ({ onViewAllClick, onSelectProduct
   const displayedWatches = enrichedWatches.slice(0, 3);
 
   return (
-    <section id="collection" style={{ padding: '10rem 4rem', background: 'var(--color-charcoal)', borderTop: '1px solid var(--color-border)' }}>
+    <section id="collection" style={{ padding: 'clamp(4rem, 8vw, 8rem) clamp(1rem, 4vw, 4rem)', background: 'var(--color-charcoal)', borderTop: '1px solid var(--color-border)' }}>
       <div style={{ maxWidth: '1440px', margin: '0 auto' }}>
         
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '6rem' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.5rem', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 'clamp(2.5rem, 5vw, 6rem)' }}>
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1 }}
-            style={{ fontSize: '3rem', color: 'var(--color-white)' }}
+            style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', color: 'var(--color-white)', margin: 0 }}
           >
             THE COLLECTION
           </motion.h2>
@@ -157,7 +157,7 @@ const Collection: React.FC<CollectionProps> = ({ onViewAllClick, onSelectProduct
           </motion.div>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '2rem' }}>
           {displayedWatches.map((watch, i) => (
             <motion.div 
               key={i}

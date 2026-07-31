@@ -55,18 +55,18 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer style={{ padding: '6rem 4rem 2rem', background: '#050505', borderTop: '1px solid var(--color-border)' }}>
+    <footer style={{ padding: 'clamp(3rem, 6vw, 6rem) clamp(1rem, 4vw, 4rem) 2rem', background: '#050505', borderTop: '1px solid var(--color-border)' }}>
       <div style={{ maxWidth: '1440px', margin: '0 auto' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '4rem', marginBottom: '6rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 250px), 1fr))', gap: '3rem', marginBottom: '4rem' }}>
           
           <div>
             <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '2rem', marginBottom: '1rem' }}>HOROLOGUE</h2>
-            <p style={{ color: 'var(--color-slate)', maxWidth: '250px' }}>
+            <p style={{ color: 'var(--color-slate)', maxWidth: '280px', lineHeight: 1.6 }}>
               Defining the new standard of ultra-luxury mechanical timepieces.
             </p>
           </div>
 
-          <div style={{ display: 'flex', gap: '4rem' }}>
+          <div style={{ display: 'flex', gap: '3rem', flexWrap: 'wrap' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <span className="technical-text" style={{ color: 'var(--color-gold)' }}>Company</span>
               <a href="#" style={{ color: 'var(--color-slate)', textDecoration: 'none', fontSize: '0.875rem' }}>Heritage</a>
@@ -90,6 +90,8 @@ const Footer: React.FC = () => {
               <form onSubmit={handleSubmit} noValidate>
                 <div style={{ 
                   display: 'flex', 
+                  flexWrap: 'wrap',
+                  gap: '0.5rem',
                   borderBottom: error ? '1px solid #ffb4ab' : '1px solid var(--color-border)', 
                   paddingBottom: '0.5rem',
                   transition: 'border-color 0.3s ease'
@@ -100,9 +102,8 @@ const Footer: React.FC = () => {
                     value={email}
                     onChange={handleEmailChange}
                     disabled={loading}
-                    style={{ background: 'transparent', border: 'none', color: 'var(--color-white)', flex: 1, outline: 'none', fontFamily: 'var(--font-body)' }}
+                    style={{ background: 'transparent', border: 'none', color: 'var(--color-white)', flex: '1 1 180px', outline: 'none', fontFamily: 'var(--font-body)', minHeight: '44px' }}
                   />
-                  {/* Fixed: button had no type="submit" and was not wrapped in a <form>, so form never submitted */}
                   <button 
                     type="submit"
                     disabled={loading}
@@ -113,7 +114,9 @@ const Footer: React.FC = () => {
                       textTransform: 'uppercase', 
                       letterSpacing: '0.1em',
                       opacity: loading ? 0.5 : 1,
-                      cursor: loading ? 'default' : 'pointer'
+                      cursor: loading ? 'default' : 'pointer',
+                      minHeight: '44px',
+                      padding: '0 0.5rem'
                     }}
                   >
                     {loading ? 'Subscribing...' : 'Subscribe'}
@@ -136,7 +139,7 @@ const Footer: React.FC = () => {
 
         </div>
 
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '2rem', borderTop: '1px solid var(--color-border)' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'space-between', alignItems: 'center', paddingTop: '2rem', borderTop: '1px solid var(--color-border)' }}>
           <span className="technical-text" style={{ color: 'var(--color-slate)' }}>© 2026 HOROLOGUE. ALL RIGHTS RESERVED.</span>
           <span className="technical-text" style={{ color: 'var(--color-slate)' }}>SWISS MADE</span>
         </div>
